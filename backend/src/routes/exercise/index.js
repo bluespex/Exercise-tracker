@@ -9,6 +9,13 @@ route.get('/', (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
+route.get('/:id', (req,res) => {
+    Exercise.findById(req.params.id)
+        .then(exercise => res.json(exercise))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+route.use('/filter', require('./filter'))
 route.use('/add', require('./add'))
 route.use('/delete', require('./delete'))
 route.use('/update', require('./update'))
