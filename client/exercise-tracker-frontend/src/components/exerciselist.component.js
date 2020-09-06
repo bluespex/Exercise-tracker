@@ -6,7 +6,8 @@ export default class ExercisesList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      exercises: []
+      exercises: [],
+      username: ""
     }
   }
   
@@ -32,6 +33,28 @@ export default class ExercisesList extends Component {
     window.location = '/';  
   }
 
+  onChangeUserame = (e)=>{
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state.username)  
+    const newUser = {
+      username: this.state.username
+    }
+
+    axios.post('http://localhost:5500/exercise/filter', newUser)
+      .then(res => this.setState({exercises: res.data}));
+
+    if(this.state.username === ""){
+      window.location = '/'
+    }
+
+  }
+
   render() {
     return (
       <div>
@@ -43,11 +66,11 @@ export default class ExercisesList extends Component {
                 <div className="input-group-prepend">
                   <div className="input-group-text">@</div>
                 </div>
-                <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="Username" onChange={this.onChangeUsername}/>
+                <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="Username" onChange={this.onChangeUserame}/>
               </div>
             </div>
             <div className="col-auto">
-              <button type="submit" className="btn btn-primary mb-2">TRAIN HARD</button>
+              <button type="submit" className="btn btn-primary mb-2">Submit</button>
             </div>
           </div>
         </form>
