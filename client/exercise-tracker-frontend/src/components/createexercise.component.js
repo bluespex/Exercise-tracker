@@ -82,7 +82,7 @@ export default class CreateExercise extends Component {
   
     // console.log(exercise);
     
-    // window.location = '/';
+    window.location = '/';
   }
 
   render() {
@@ -92,7 +92,7 @@ export default class CreateExercise extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Username: </label>
-            <select ref="userInput"
+            <select 
                 required
                 className="form-control"
                 value={this.state.username}
