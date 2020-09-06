@@ -8,9 +8,28 @@ export default class CreateUser extends Component {
     super(props)
     this.state = {
       username: "",
-      name: ""  
+      name: "",
+      users: []  
     }
-  } 
+  }
+  
+  componentDidMount() {
+    axios.get('http://localhost:5500/user')
+      .then(res => {
+        this.setState({
+          users:  res.data
+        })
+        console.log(this.state.users)
+      })
+      .catch(err => {
+        console.log(err)
+      })  
+  }
+
+  // deleteUser = (ID) => {
+  //   console.log(ID)
+  // }
+
   onChangeUsername = (e)=>{
     this.setState({
       username: e.target.value
@@ -57,6 +76,27 @@ export default class CreateUser extends Component {
             </div>
           </div>
         </form>
+
+
+        <h2>USERS</h2>
+        <div className="card-group">
+          {
+            this.state.users.map( (val , i , a) => {
+              return (
+                <div className="card text-white bg-dark mb-3 m-1" key={i}>
+                  <div className="card-body">
+                    <h5 className="card-title">{val.username}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{val.createdAt}</h6>
+                    {/* <button onClick={()=>{this.deleteUser(val._id)}} className="btn btn-primary mb-2" >DELETE</button> */}
+
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+
+
       </div>
     )
   }
