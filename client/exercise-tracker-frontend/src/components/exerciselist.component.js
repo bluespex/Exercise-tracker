@@ -18,8 +18,7 @@ export default class ExercisesList extends Component {
       })
       .catch(err => {
         console.log(err)
-      })
-    
+      })  
   }
   render() {
     return (
@@ -42,7 +41,24 @@ export default class ExercisesList extends Component {
         </form>
         <br/>
 
-        <p>exercise routine for username</p>
+        <h2>Exercise Routine</h2>
+        <div>
+          {
+            this.state.exercises.map( (val , i , a) => {
+              return (
+                <div className="card" key={i}>
+                  <div className="card-body">
+                    <h5 className="card-title">{val.description}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{val.username}</h6>
+                    <p className="card-text">Duration : {val.duration} </p>
+                    <p className="card-text">Date : {val.date} </p>
+
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
 
       </div>
     )
