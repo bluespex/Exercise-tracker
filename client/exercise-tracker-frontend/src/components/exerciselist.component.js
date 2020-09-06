@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export default class ExercisesList extends Component {
   constructor(props) {
@@ -63,7 +64,10 @@ export default class ExercisesList extends Component {
                     <h6 className="card-subtitle mb-2 text-muted">{val.username}</h6>
                     <p className="card-text">Duration : {val.duration} </p>
                     <p className="card-text">Date : {val.date} </p>
-                    <button onClick={()=>{this.deleteExercise(val._id)}} className="btn btn-primary mb-2" >DELETE</button>
+                    <button onClick={()=>{this.deleteExercise(val._id)}} className="btn btn-primary mb-2 m-2" >DELETE</button>
+                    <Link to={"/edit/"+val._id}>
+                      <button className="btn btn-primary mb-2 m-2" >EDIT</button>
+                    </Link>
 
                   </div>
                 </div>
