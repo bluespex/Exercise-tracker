@@ -15,6 +15,9 @@ route.get('/:id', (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+
+route.use('/filter', require('./filter'))
+
 route.use('/add', require('./add'))
 route.use('/delete', require('./delete'))
 route.use('/update', require('./update'))
